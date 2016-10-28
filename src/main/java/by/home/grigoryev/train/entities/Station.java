@@ -16,26 +16,26 @@ public class Station implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private String Station;
+	private String station;
 
 	public String getStation() {
-		return Station;
+		return station;
 	}
 
 	public void setStation(String station) {
-		Station = station;
+		this.station = station;
 	}
 
 	@Override
 	public String toString() {
-		return "Station [Station=" + Station + "]";
+		return "Station [Station=" + station + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((Station == null) ? 0 : Station.hashCode());
+		result = prime * result + ((station == null) ? 0 : station.hashCode());
 		return result;
 	}
 
@@ -48,10 +48,10 @@ public class Station implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Station other = (Station) obj;
-		if (Station == null) {
-			if (other.Station != null)
+		if (station == null) {
+			if (other.station != null)
 				return false;
-		} else if (!Station.equals(other.Station))
+		} else if (!station.equals(other.station))
 			return false;
 		return true;
 	}

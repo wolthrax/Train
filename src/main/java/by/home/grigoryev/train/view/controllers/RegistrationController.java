@@ -17,7 +17,7 @@ import by.home.grigoryev.train.view.io.utils.Validator;
  * @author Maksim
  *
  */
-public class RegistrationController extends Controller{
+public class RegistrationController implements Controller{
 
 	@Override
 	public void shooseOperation(int operationNumber) {

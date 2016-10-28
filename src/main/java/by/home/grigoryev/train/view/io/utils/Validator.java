@@ -4,10 +4,17 @@
 package by.home.grigoryev.train.view.io.utils;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import by.home.grigoryev.train.entities.Station;
+import by.home.grigoryev.train.entities.User;
+import by.home.grigoryev.train.service.menegers.admin.AdminManagerImpl;
+import by.home.grigoryev.train.service.menegers.admin.IAdminManager;
+import by.home.grigoryev.train.view.io.OutputInfo;
 
 
 
@@ -18,25 +25,13 @@ import java.util.regex.Pattern;
 public class Validator {
 	
 	public static Map<String, String> messageMap = new HashMap<>();
-	Utils utils = new Utils();
+	private Utils utils = new Utils();
 
-	public int validationNumbersOfMenu(String number, int maxMenuItem){
+	public void validationNumbersOfMenu(int menuItem, int maxMenuItem){
 		
-		Scanner scanner = new Scanner(number);
-		
-		int operation = 0;
-		
-		if(scanner.hasNextInt()){
-			operation = scanner.nextInt();
-			scanner.close();
-		} else {
-			System.out.println("¬веден недопустимый символ");
+		if(menuItem < 1 || menuItem > maxMenuItem){
+			OutputInfo.showMessage("No menu item");
 		}
-		
-		if(operation < 1 || operation > maxMenuItem)
-			System.out.println("¬веден недопустимый символ");
-		
-		return operation;
 	}
 	
 	public boolean checkRegexp(String inputValue, String property){
@@ -50,5 +45,30 @@ public class Validator {
 			messageMap.put(property, utils.getPropsMessage(property));
 		
 		return matcher.matches();
+	}
+	
+	public void checkLogin(String login){
+		
+		IAdminManager adminManager = new AdminManagerImpl();
+		List<User> userList = adminManager.getUserList();
+		for(User user : userList){
+			if(login.equals(user.getLogin()))
+				messageMap.put("user.login.exist", utils.getPropsMessage("user.login.exist"));
+		}
+	}
+	
+	public boolean checkStation(int id){
+		
+		boolean checkStation = false;
+		IAdminManager adminManager = new AdminManagerImpl();
+		Set<Station> stations = adminManager.getStationList();
+		
+		if(!stations.isEmpty() && !(stations.size() < 2)){
+			if(!(id < 1) && !(id > stations.size())){
+				checkStation = true;
+			} else messageMap.put("station.name.exist", utils.getPropsMessage("station.name.exist"));
+		} else messageMap.put("station.empty", utils.getPropsMessage("station.empty"));
+		
+		return checkStation;
 	}
 }

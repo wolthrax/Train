@@ -8,7 +8,7 @@ package by.home.grigoryev.train.view.controllers;
  * @author Maksim
  *
  */
-public abstract class Controller {
+public interface Controller {
 	
-	public abstract void shooseOperation(int operationNumber);
+	void shooseOperation(int operationNumber);
 }

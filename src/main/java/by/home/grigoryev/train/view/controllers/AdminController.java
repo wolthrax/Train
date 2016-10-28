@@ -3,16 +3,19 @@
  */
 package by.home.grigoryev.train.view.controllers;
 
+import by.home.grigoryev.train.entities.Station;
+import by.home.grigoryev.train.entities.Train;
 import by.home.grigoryev.train.service.menegers.admin.AdminManagerImpl;
 import by.home.grigoryev.train.service.menegers.admin.IAdminManager;
 import by.home.grigoryev.train.view.io.InputInfo;
 import by.home.grigoryev.train.view.io.OutputInfo;
+import by.home.grigoryev.train.view.io.utils.Validator;
 
 /**
  * @author Maksim
  *
  */
-public class AdminController extends Controller{
+public class AdminController implements Controller{
 
 	@Override
 	public void shooseOperation(int operationNumber) {
@@ -26,16 +29,21 @@ public class AdminController extends Controller{
 			// Add train
 			case 1:{
 				
-				if(!adminManager.getStationList().isEmpty())
-					adminManager.addTrain(inputInfo.inputTrainInfo());
-				else OutputInfo.showMessage("No one station");
+				Train train = inputInfo.inputTrainInfo();
+				if(Validator.messageMap.isEmpty())
+					adminManager.addTrain(train);
+				else outputInfo.showErrorMessages();
 				
 			} break;
 			
 			// Add station
 			case 2:{
 			
-				adminManager.addStation(inputInfo.inputStaionInfo());
+				Station station = inputInfo.inputStaionInfo();
+				if(Validator.messageMap.isEmpty())
+					adminManager.addStation(station);
+				else outputInfo.showErrorMessages();
+				
 					
 			} break;
 			
@@ -47,8 +55,14 @@ public class AdminController extends Controller{
 				
 			} break;
 			
-			// Logout
 			case 4:{
+				
+				adminManager.removeDepartedTrains();
+				
+			} break;
+			
+			// Logout
+			case 5:{
 				
 				adminManager.logout();
 				

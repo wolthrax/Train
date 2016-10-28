@@ -5,6 +5,8 @@ package by.home.grigoryev.train.service.menegers.admin;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import by.home.grigoryev.train.dba.dao.BaseDaoImpl;
@@ -23,6 +25,14 @@ import by.home.grigoryev.train.service.menegers.ManagerImpl;
  */
 public class AdminManagerImpl extends ManagerImpl implements IAdminManager{
 
+	@Override
+	public List<User> getUserList() {
+		
+		IBaseDao<User, Serializable> dao = new BaseDaoImpl<>(User.class);
+		List<User> userList = dao.getAll();
+		return userList;
+	}
+	
 	@Override
 	public List<Train> getTrainList() {
 		
@@ -68,5 +78,22 @@ public class AdminManagerImpl extends ManagerImpl implements IAdminManager{
 		Train train = dao.get(trainId);
 		
 		return train.getUserList();
+	}
+
+	@Override
+	public void removeDepartedTrains() {
+		
+		IBaseDao<Train, Serializable> dao = new BaseDaoImpl<>(Train.class);
+		List<Train> trainList = dao.getAll();
+		List<Train>	newTrainList = new ArrayList<>();
+		GregorianCalendar now = new GregorianCalendar();
+		
+		for(Train currentTrain : trainList){
+			if(!currentTrain.getSchedule().getDepatureTime().getTime().before(now.getTime())){
+				newTrainList.add(currentTrain);
+			}
+		}
+		
+		dao.update(newTrainList);
 	}
 }

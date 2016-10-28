@@ -9,7 +9,7 @@ import by.home.grigoryev.train.entities.enums.UserRole;
  * @author Maksim
  *
  */
-public class CheckUser {
+public class Session {
 	
 	public static UserRole currentRole = UserRole.NO;
 	public static int userId = 0;

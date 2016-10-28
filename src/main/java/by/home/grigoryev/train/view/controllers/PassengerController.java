@@ -9,16 +9,16 @@ import by.home.grigoryev.train.entities.Ticket;
 import by.home.grigoryev.train.entities.Train;
 import by.home.grigoryev.train.service.menegers.passenger.IPassengerManager;
 import by.home.grigoryev.train.service.menegers.passenger.PassengerManagerImpl;
-import by.home.grigoryev.train.service.utils.CheckUser;
 import by.home.grigoryev.train.view.io.InputInfo;
 import by.home.grigoryev.train.view.io.OutputInfo;
+import by.home.grigoryev.train.view.io.utils.Validator;
 
 /**
  * 
  * @author Maksim
  *
  */
-public class PassengerController extends Controller{
+public class PassengerController implements Controller{
 	
 	@Override
 	public void shooseOperation(int operationNumber) {
@@ -36,8 +36,12 @@ public class PassengerController extends Controller{
 				if(suitableTrainList.isEmpty()){
 					OutputInfo.showMessage("No suitable trains");
 				} else {
+					
 					outputInfo.showTrains(suitableTrainList);
-					passManager.bookATicket(inputInfo.inputId());
+					int trainId = inputInfo.inputId();
+					if(Validator.messageMap.isEmpty())
+						passManager.bookATicket(trainId);
+					else outputInfo.showErrorMessages();
 				}
 					
 			}break;
@@ -48,12 +52,6 @@ public class PassengerController extends Controller{
 					
 			}break;
 			case 3:{
-				
-				
-				
-			}break;
-			
-			case 4:{
 				
 				passManager.logout();
 				

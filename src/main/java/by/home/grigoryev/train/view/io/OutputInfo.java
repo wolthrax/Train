@@ -23,6 +23,7 @@ import by.home.grigoryev.train.view.io.utils.Validator;
 public class OutputInfo {
 	
 	public static void showMessage(String message){
+		System.out.println();
 		System.out.println(message);
 	}
 	
@@ -43,6 +44,7 @@ public class OutputInfo {
 	public void showTrains(List<Train> trainList){
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+		System.out.println();
 		System.out.println(String.format("%5s%13s%20s%20s%20s%6s%12s", "id" + "|", "Dep. station" + "|", 
 				"Arrival station" + "|", "Dep. time" + "|", "Arrival time" + "|", 
 				"Places" + "|", "Ticket price" + " "));
@@ -58,7 +60,7 @@ public class OutputInfo {
 	
 	public void showTickets(List<Ticket> tickets){
 		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm");
-		
+		System.out.println();
 		System.out.println(String.format("%5s%13s%20s%20s%20s%6s%12s", "id" + "|", "Dep. station" + "|", 
 				"Arrival station" + "|", "Dep. time" + "|", "Arrival time" + "|", 
 				"Place" + "|", "Ticket price" + " "));
@@ -74,12 +76,15 @@ public class OutputInfo {
 	}
 	
 	public void showUsers(List<User> users){
-		System.out.println(String.format("%5s%13s%13s%13s%20s%15s", "id" + "|", "Login" + "|", "Name" + "|",
-				"Surname" + "|", "Email" + "|", "Phone" + " "));
-		
-		for(User user : users){
-			System.out.println(String.format("%5s%13s%13s%13s%20s%15s", user.getId() + "|", user.getLogin() + "|", 
-					user.getName() + "|", user.getSurname() + "|", user.getEmail() + "|", user.getPhone() + " "));
+		if(users != null){
+			System.out.println();
+			System.out.println(String.format("%5s%13s%13s%13s%20s%15s", "id" + "|", "Login" + "|", "Name" + "|",
+					"Surname" + "|", "Email" + "|", "Phone" + " "));
+			
+			for(User user : users){
+				System.out.println(String.format("%5s%13s%13s%13s%20s%15s", user.getId() + "|", user.getLogin() + "|", 
+						user.getName() + "|", user.getSurname() + "|", user.getEmail() + "|", user.getPhone() + " "));
+			}
 		}
 	}
 	

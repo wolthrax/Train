@@ -10,6 +10,7 @@ import java.util.Properties;
 import java.util.Set;
 
 import by.home.grigoryev.train.entities.Station;
+import by.home.grigoryev.train.utils.FilePath;
 import by.home.grigoryev.train.view.io.OutputInfo;
 
 /**
@@ -34,35 +35,31 @@ public class Utils {
 	}
 	
 	public String getPropsMessage(String key){
-		String value = "";
 		
+		FilePath filePath = new FilePath();
 		Properties props = new Properties();
 		
-		try(InputStream is = getClass().getResourceAsStream("/validator/messages.properties")){
+		try(InputStream is = getClass().getResourceAsStream(filePath.getFilePath("file.message"))){
 			props.load(is);
 		} catch (IOException e) {
 			OutputInfo.showMessage("Can`t found message.properties");
 		}
 		
-		value = props.getProperty(key);
-		
-		return value;
+		return props.getProperty(key);
 	}
 	
 	public String getPropsRegex(String key){
-		String value = "";
 		
+		FilePath filePath = new FilePath();
 		Properties props = new Properties();
 		
-		try(InputStream is = getClass().getResourceAsStream("/validator/regex.properties")){
+		try(InputStream is = getClass().getResourceAsStream(filePath.getFilePath("file.regex"))){
 			props.load(is);
 		} catch (IOException e) {
 			OutputInfo.showMessage("Can`t found regex.properties");
 		}
 		
-		value = props.getProperty(key);
-		
-		return value;
+		return props.getProperty(key);
 	}
 	
 }

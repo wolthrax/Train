@@ -11,7 +11,7 @@ import by.home.grigoryev.train.entities.Station;
  * @author Maksim
  *
  */
-public class Order implements Comparator<Station>{
+public class StationComparator implements Comparator<Station>{
 
 	@Override
 	public int compare(Station o1, Station o2) {

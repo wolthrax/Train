@@ -22,24 +22,24 @@ public interface IPassengerManager extends IManager{
 	 * 
 	 * @param user
 	 */
-	public void addPassenger(User user);
+	void addPassenger(User user);
 	
 	/**
 	 * 
 	 * @param objects
 	 */
-	public List<Train> getSuitableTrains(Object[] objects);
+	List<Train> getSuitableTrains(Object[] objects);
 	
 	/**
 	 * 
 	 * @param train
 	 */
-	public void bookATicket(int id);
+	void bookATicket(int id);
 	
 	/**
 	 * 
 	 * @return
 	 */
-	public List<Ticket> getAllTicket();
+	List<Ticket> getAllTicket();
 	
 }

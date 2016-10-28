@@ -16,6 +16,7 @@ import java.util.List;
 
 import by.home.grigoryev.train.entities.Train;
 import by.home.grigoryev.train.entities.User;
+import by.home.grigoryev.train.utils.FilePath;
 import by.home.grigoryev.train.view.io.OutputInfo;
 
 /**
@@ -27,7 +28,8 @@ import by.home.grigoryev.train.view.io.OutputInfo;
  */
 public class BaseDaoImpl<T, PK extends Serializable> implements IBaseDao<T, PK>{
 	
-	Class<T> clazz;
+	private Class<T> clazz;
+	private FilePath filePath = new FilePath();
 	
 	public BaseDaoImpl() {
 		super();
@@ -43,9 +45,9 @@ public class BaseDaoImpl<T, PK extends Serializable> implements IBaseDao<T, PK>{
 		
 		String path = "";
 		if(clazz.equals(User.class)){
-			path = "C:\\Railway\\UserList.txt";
+			path = filePath.getFilePath("file.user");
 		}else if(clazz.equals(Train.class)){
-			path = "C:\\Railway\\TrainList.txt";
+			path = filePath.getFilePath("file.train");
 		}
 		List<T> objList = new ArrayList<>();
 		
@@ -55,11 +57,11 @@ public class BaseDaoImpl<T, PK extends Serializable> implements IBaseDao<T, PK>{
 				objList = (List<T>) ois.readObject();
 				
 			} catch (FileNotFoundException e) {
-				System.err.println("File " + path + "not found");
+				OutputInfo.showMessage("File " + path + " not found");
 			} catch (IOException e) {
-				System.err.println("IOException");
+				OutputInfo.showMessage("IOException");
 			} catch (ClassNotFoundException e) {
-				System.err.println("ClassNotFoundException");
+				OutputInfo.showMessage("ClassNotFoundException");
 			}
 		}
 		return objList;
@@ -80,6 +82,9 @@ public class BaseDaoImpl<T, PK extends Serializable> implements IBaseDao<T, PK>{
 					break;
 				}
 			}
+			
+			if(user.getId() == 0)
+				OutputInfo.showMessage("User: " + id + " does not exist");
 			return (T) user;
 			
 		}else if(clazz.equals(Train.class)){
@@ -93,6 +98,9 @@ public class BaseDaoImpl<T, PK extends Serializable> implements IBaseDao<T, PK>{
 					break;
 				}
 			}
+			
+			if(train.getId() == 0)
+				OutputInfo.showMessage("Train: " + id + " does not exist");
 			return (T) train;
 		}		
 		return null;
@@ -102,9 +110,9 @@ public class BaseDaoImpl<T, PK extends Serializable> implements IBaseDao<T, PK>{
 	public void add(T object) throws IOException {
 		String path = "";
 		if(clazz.equals(User.class)){
-			path = "C:\\Railway\\UserList.txt";
+			path = filePath.getFilePath("file.user");
 		}else if(clazz.equals(Train.class)){
-			path = "C:\\Railway\\TrainList.txt";
+			path = filePath.getFilePath("file.train");
 		}
 		
 		List<T> objList = new ArrayList<>();
@@ -114,11 +122,11 @@ public class BaseDaoImpl<T, PK extends Serializable> implements IBaseDao<T, PK>{
 		try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(path))){
 			
 			oos.writeObject(objList);
+			OutputInfo.showMessage("Entity added");
 			
 		} catch (Exception e) {
 			OutputInfo.showMessage("Error write object");
 		}
-		System.out.println("Файл записан");
 	}
 
 	@Override
@@ -126,9 +134,9 @@ public class BaseDaoImpl<T, PK extends Serializable> implements IBaseDao<T, PK>{
 		
 		String path = "";
 		if(clazz.equals(User.class)){
-			path = "C:\\Railway\\UserList.txt";
+			path = filePath.getFilePath("file.user");
 		}else if(clazz.equals(Train.class)){
-			path = "C:\\Railway\\TrainList.txt";
+			path = filePath.getFilePath("file.train");
 		}
 		
 		try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(path))){
@@ -152,9 +160,9 @@ public class BaseDaoImpl<T, PK extends Serializable> implements IBaseDao<T, PK>{
 		
 		File file = new File("");
 		if(clazz.equals(User.class)){
-			file = new File("C:\\Railway\\UserList.txt");
+			file = new File(filePath.getFilePath("file.user"));
 		}else if(clazz.equals(Train.class)){
-			file = new File("C:\\Railway\\TrainList.txt");
+			file = new File(filePath.getFilePath("file.train"));
 		}
 		
 		if(file.length() == 0)

@@ -16,7 +16,7 @@ import by.home.grigoryev.train.entities.Station;
 import by.home.grigoryev.train.entities.User;
 import by.home.grigoryev.train.entities.enums.UserRole;
 import by.home.grigoryev.train.exceptions.IncorrectLoginOrPass;
-import by.home.grigoryev.train.service.utils.CheckUser;
+import by.home.grigoryev.train.service.utils.Session;
 
 /**
  * @author Maksim
@@ -35,13 +35,13 @@ public class ManagerImpl implements IManager{
 		for(User user : userList){	
 			if(user.getLogin().equals(credential[0]) && 
 					user.getPassword().equals(credential[1])){
-				CheckUser.currentRole = user.getRole();
-				CheckUser.userId = user.getId();
+				Session.currentRole = user.getRole();
+				Session.userId = user.getId();
 				break;
 			}
 		}
 		
-		if(CheckUser.currentRole.equals(UserRole.NO)){
+		if(Session.currentRole.equals(UserRole.NO)){
 			throw new IncorrectLoginOrPass("Incorrect login or password");
 			//System.out.println("Incorrect login or password");
 		}	
@@ -58,7 +58,7 @@ public class ManagerImpl implements IManager{
 
 	@Override
 	public void logout() {
-		CheckUser.userId = -1;
-		CheckUser.currentRole = UserRole.NO;
+		Session.userId = -1;
+		Session.currentRole = UserRole.NO;
 	}
 }

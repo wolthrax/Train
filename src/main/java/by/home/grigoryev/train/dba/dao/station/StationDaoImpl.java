@@ -5,7 +5,6 @@ package by.home.grigoryev.train.dba.dao.station;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Serializable;
@@ -13,8 +12,10 @@ import java.util.Scanner;
 import java.util.TreeSet;
 
 import by.home.grigoryev.train.dba.dao.BaseDaoImpl;
-import by.home.grigoryev.train.dba.utils.Order;
+import by.home.grigoryev.train.dba.utils.StationComparator;
 import by.home.grigoryev.train.entities.Station;
+import by.home.grigoryev.train.utils.FilePath;
+import by.home.grigoryev.train.view.io.OutputInfo;
 
 /**
  * @author Maksim
@@ -26,16 +27,23 @@ public class StationDaoImpl extends BaseDaoImpl<Station, Serializable> implement
 		super();
 	}
 	
+	private FilePath filePath = new FilePath();
+	
 	@Override
 	public TreeSet<Station> getStationList() {
 		
 		
-		TreeSet<Station> stationList = new TreeSet<>(new Order());
+		TreeSet<Station> stationList = new TreeSet<>(new StationComparator());
 		
-		File file = new File("C:\\Railway\\Station.txt");
-		try(FileReader fileReader = new FileReader(file)){
+		File file = new File(filePath.getFilePath("file.station"));
+		
 			
-			Scanner scanner = new Scanner(file);
+			Scanner scanner = null;
+			try {
+				scanner = new Scanner(file);
+			} catch (FileNotFoundException e) {
+				OutputInfo.showMessage("File " + file.getName() + " not found");
+			}
 			
 			while(scanner.hasNextLine()){
 				Station station = new Station();
@@ -45,12 +53,6 @@ public class StationDaoImpl extends BaseDaoImpl<Station, Serializable> implement
 			
 			scanner.close();
 			
-		} catch (FileNotFoundException e) {
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
 		return stationList;
 	}
@@ -58,12 +60,12 @@ public class StationDaoImpl extends BaseDaoImpl<Station, Serializable> implement
 	@Override
 	public void addStation(Station station) {
 		
-		try(FileWriter fileWriter = new FileWriter("C:\\Railway\\Station.txt", true)){
+		try(FileWriter fileWriter = new FileWriter(filePath.getFilePath("file.station"), true)){
 			
 			fileWriter.write(station.getStation() + "\n");
 			
 		} catch (IOException e) {
-			e.printStackTrace();
+			OutputInfo.showMessage("IOException");
 		}
 	}
 }

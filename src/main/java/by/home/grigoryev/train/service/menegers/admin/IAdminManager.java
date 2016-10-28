@@ -17,9 +17,11 @@ import by.home.grigoryev.train.service.menegers.IManager;
  */
 public interface IAdminManager extends IManager{
 	
-	public List<Train> getTrainList();
-	public void addTrain(Train train);
-	public void addStation(Station station);
-	public List<User> getUsersOnTrain(int trainId);
+	List<User> getUserList();
+	List<Train> getTrainList();
+	void addTrain(Train train);
+	void addStation(Station station);
+	List<User> getUsersOnTrain(int trainId);
+	void removeDepartedTrains();
 	
 }

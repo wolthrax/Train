@@ -19,7 +19,7 @@ import by.home.grigoryev.train.entities.Train;
 import by.home.grigoryev.train.entities.User;
 import by.home.grigoryev.train.entities.enums.UserRole;
 import by.home.grigoryev.train.service.menegers.ManagerImpl;
-import by.home.grigoryev.train.service.utils.CheckUser;
+import by.home.grigoryev.train.service.utils.Session;
 import by.home.grigoryev.train.view.io.OutputInfo;
 
 /**
@@ -110,13 +110,24 @@ public class PassengerManagerImpl extends ManagerImpl implements IPassengerManag
 		int indexTrain = trainList.indexOf(train);
 		
 		for(User currentUser : userList){
-			if(CheckUser.userId == currentUser.getId()){
+			if(Session.userId == currentUser.getId()){
 				user = currentUser;
 				break;
 			}
 		}
 		
-		if(train.getNumberOfSeats() > 0){
+		boolean money = false;
+		boolean place = false;
+		
+		if(train.getId() != 0 && train.getNumberOfSeats() > 0)
+			place = true;
+		else OutputInfo.showMessage("No places");
+		
+		if(user.getMoney() > train.getPrice())
+			money = true;
+		else OutputInfo.showMessage("No money");
+		
+		if(money && place){
 			ticket.setId(train.getId());
 			ticket.setSchedule(train.getSchedule());
 			ticket.setPrice(train.getPrice());
@@ -137,8 +148,7 @@ public class PassengerManagerImpl extends ManagerImpl implements IPassengerManag
 			userDao.update(userList);
 			
 			OutputInfo.showMessage("Money: " + user.getMoney());
-			
-		} else OutputInfo.showMessage("No places");
+		} 
 	}
 
 	@Override
@@ -148,7 +158,7 @@ public class PassengerManagerImpl extends ManagerImpl implements IPassengerManag
 		List<User> users = dao.getAll();
 		User user = new User();
 		for(User currentUser : users){
-			if(currentUser.getId() == CheckUser.userId){
+			if(currentUser.getId() == Session.userId){
 				user = currentUser;
 				break;
 			}
