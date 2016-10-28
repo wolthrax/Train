@@ -35,13 +35,14 @@ public class Menu {
 	public void showPassengerMenu(){
 		System.out.println("1. Book a ticket");
 		System.out.println("2. Show all tickets");
-		System.out.println("3. Logout");
-		System.out.print("Enter number(1-3):");
+		System.out.println("3. Get objects number");
+		System.out.println("4. Logout");
+		System.out.print("Enter number(1-4):");
 		Controller controller = new PassengerController();
 		
 		Scanner scanner = new Scanner();
 		int operation = scanner.getInt();
-		validator.validationNumbersOfMenu(operation, 3);
+		validator.validationNumbersOfMenu(operation, 4);
 		controller.shooseOperation(operation);
 	}
 	

@@ -51,7 +51,14 @@ public class PassengerController implements Controller{
 				outputInfo.showTickets(tickets);
 					
 			}break;
+			
 			case 3:{
+				
+				OutputInfo.showMessage(String.valueOf(PassengerManagerImpl.count));
+				
+			}break;
+			
+			case 4:{
 				
 				passManager.logout();
 				

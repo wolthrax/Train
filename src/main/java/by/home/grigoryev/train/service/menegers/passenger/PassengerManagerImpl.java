@@ -29,6 +29,12 @@ import by.home.grigoryev.train.view.io.OutputInfo;
  */
 public class PassengerManagerImpl extends ManagerImpl implements IPassengerManager{
 	
+	public static int count = 0;
+	
+	public PassengerManagerImpl() {
+		count++;
+	}
+	
 	@Override
 	public void addPassenger(User user) {
 		IBaseDao<User, Serializable> dao = new BaseDaoImpl<>(User.class);
