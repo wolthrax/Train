@@ -25,6 +25,9 @@ import by.home.grigoryev.train.service.menegers.ManagerImpl;
  */
 public class AdminManagerImpl extends ManagerImpl implements IAdminManager{
 
+	/**
+	 * Get all users from a file UserList.txt
+	 */
 	@Override
 	public List<User> getUserList() {
 		
@@ -33,6 +36,9 @@ public class AdminManagerImpl extends ManagerImpl implements IAdminManager{
 		return userList;
 	}
 	
+	/**
+	 * Get all trains from a file TrainList.txt
+	 */
 	@Override
 	public List<Train> getTrainList() {
 		
@@ -42,6 +48,9 @@ public class AdminManagerImpl extends ManagerImpl implements IAdminManager{
 		return trainList;
 	}
 	
+	/**
+	 * Write a new train in file TrainList.txt
+	 */
 	@Override
 	public void addTrain(Train train) {
 		IBaseDao<Train, Serializable> dao = new BaseDaoImpl<>(Train.class);
@@ -63,6 +72,9 @@ public class AdminManagerImpl extends ManagerImpl implements IAdminManager{
 		}
 	}
 	
+	/**
+	 * Write a new station in file Station.txt
+	 */
 	@Override
 	public void addStation(Station station) {
 		
@@ -71,6 +83,9 @@ public class AdminManagerImpl extends ManagerImpl implements IAdminManager{
 		
 	}
 
+	/**
+	 * Get all passengers, who booked a ticket on the train.
+	 */
 	@Override
 	public List<User> getUsersOnTrain(int trainId) {
 		
@@ -80,6 +95,9 @@ public class AdminManagerImpl extends ManagerImpl implements IAdminManager{
 		return train.getUserList();
 	}
 
+	/**
+	 * Train removal that have already gone.
+	 */
 	@Override
 	public void removeDepartedTrains() {
 		

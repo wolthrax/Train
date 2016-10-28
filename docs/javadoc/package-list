@@ -1,0 +1,15 @@
+by.home.grigoryev.train
+by.home.grigoryev.train.dba.dao
+by.home.grigoryev.train.dba.dao.station
+by.home.grigoryev.train.dba.utils
+by.home.grigoryev.train.entities
+by.home.grigoryev.train.entities.enums
+by.home.grigoryev.train.exceptions
+by.home.grigoryev.train.service.menegers
+by.home.grigoryev.train.service.menegers.admin
+by.home.grigoryev.train.service.menegers.passenger
+by.home.grigoryev.train.service.utils
+by.home.grigoryev.train.utils
+by.home.grigoryev.train.view.controllers
+by.home.grigoryev.train.view.io
+by.home.grigoryev.train.view.io.utils

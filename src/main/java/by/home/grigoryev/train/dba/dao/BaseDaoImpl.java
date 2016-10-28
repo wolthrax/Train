@@ -23,8 +23,8 @@ import by.home.grigoryev.train.view.io.OutputInfo;
  * 
  * @author Maksim
  *
- * @param <T>
- * @param <PK>
+ * @param <T> T
+ * @param <PK> PK
  */
 public class BaseDaoImpl<T, PK extends Serializable> implements IBaseDao<T, PK>{
 	
@@ -39,6 +39,9 @@ public class BaseDaoImpl<T, PK extends Serializable> implements IBaseDao<T, PK>{
 		this.clazz = clazz;
 	}
 
+	/**
+	 * Get all objects from file.
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<T> getAll() {
@@ -67,6 +70,9 @@ public class BaseDaoImpl<T, PK extends Serializable> implements IBaseDao<T, PK>{
 		return objList;
 	}
 
+	/**
+	 * Get object by id.
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public T get(PK id) {
@@ -106,6 +112,9 @@ public class BaseDaoImpl<T, PK extends Serializable> implements IBaseDao<T, PK>{
 		return null;
 	}
 
+	/**
+	 * Add new object.
+	 */
 	@Override
 	public void add(T object) throws IOException {
 		String path = "";
@@ -129,6 +138,9 @@ public class BaseDaoImpl<T, PK extends Serializable> implements IBaseDao<T, PK>{
 		}
 	}
 
+	/**
+	 * Update data in file.
+	 */
 	@Override
 	public void update(List<T> object) {
 		
@@ -149,12 +161,18 @@ public class BaseDaoImpl<T, PK extends Serializable> implements IBaseDao<T, PK>{
 		
 	}
 
+	/**
+	 * Delete object by id
+	 */
 	@Override
 	public void delete(T object) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/**
+	 * Check file.
+	 */
 	@Override
 	public boolean fileIsEmpty() {
 		

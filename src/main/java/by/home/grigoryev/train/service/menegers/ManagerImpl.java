@@ -24,6 +24,10 @@ import by.home.grigoryev.train.service.utils.Session;
  */
 public class ManagerImpl implements IManager{
 
+	/**
+	 * Check the login and password, initializes the fields in the class Session.
+	 */
+	
 	@Override
 	public void checkCredential(String[] credential) throws IncorrectLoginOrPass{
 		
@@ -47,6 +51,9 @@ public class ManagerImpl implements IManager{
 		}	
 	}
 
+	/**
+	 * Get a list of sorted stations.
+	 */
 	@Override
 	public TreeSet<Station> getStationList() {
 		
@@ -56,6 +63,9 @@ public class ManagerImpl implements IManager{
 		return stationList;
 	}
 
+	/**
+	 * Logout and reset values of class Session.
+	 */
 	@Override
 	public void logout() {
 		Session.userId = -1;

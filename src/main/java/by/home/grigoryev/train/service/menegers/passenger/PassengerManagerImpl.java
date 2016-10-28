@@ -35,6 +35,9 @@ public class PassengerManagerImpl extends ManagerImpl implements IPassengerManag
 		count++;
 	}
 	
+	/**
+	 * Write a new train in file UserList.txt
+	 */
 	@Override
 	public void addPassenger(User user) {
 		IBaseDao<User, Serializable> dao = new BaseDaoImpl<>(User.class);
@@ -58,6 +61,9 @@ public class PassengerManagerImpl extends ManagerImpl implements IPassengerManag
 		}
 	}
 
+	/**
+	 * Getting trains suitable time.
+	 */
 	@Override
 	public List<Train> getSuitableTrains(Object[] objects) {
 		
@@ -97,6 +103,9 @@ public class PassengerManagerImpl extends ManagerImpl implements IPassengerManag
 		return suitableTrains;	
 	}
 
+	/**
+	 * Ticket booking for a suitable train.
+	 */
 	@Override
 	public void bookATicket(int id) {
 		
@@ -157,6 +166,9 @@ public class PassengerManagerImpl extends ManagerImpl implements IPassengerManag
 		} 
 	}
 
+	/**
+	 * Getting all the tickets are booked passenger.
+	 */
 	@Override
 	public List<Ticket> getAllTicket() {
 		

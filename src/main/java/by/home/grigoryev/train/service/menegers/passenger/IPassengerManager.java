@@ -19,26 +19,30 @@ import by.home.grigoryev.train.service.menegers.IManager;
 public interface IPassengerManager extends IManager{
 	
 	/**
+	 * Write a new train in file UserList.txt
 	 * 
-	 * @param user
+	 * @param user entity User
 	 */
 	void addPassenger(User user);
 	
 	/**
+	 * Getting trains suitable time.
 	 * 
-	 * @param objects
+	 * @param objects array of options for getting a suitable trains.
 	 */
 	List<Train> getSuitableTrains(Object[] objects);
 	
 	/**
+	 * Ticket booking for a suitable train.
 	 * 
-	 * @param train
+	 * @param id id suitable train.
 	 */
 	void bookATicket(int id);
 	
 	/**
+	 * Getting all the tickets are booked passenger.
 	 * 
-	 * @return
+	 * @return list of tickets are booked passenger
 	 */
 	List<Ticket> getAllTicket();
 	
