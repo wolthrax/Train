@@ -12,7 +12,6 @@ import java.util.Set;
 
 import by.home.grigoryev.train.entities.Schedule;
 import by.home.grigoryev.train.entities.Station;
-import by.home.grigoryev.train.entities.Ticket;
 import by.home.grigoryev.train.entities.Train;
 import by.home.grigoryev.train.entities.User;
 import by.home.grigoryev.train.entities.enums.UserRole;
@@ -32,9 +31,7 @@ public class InputInfo {
 	private Utils utils = new Utils();
 	private Validator validator = new Validator();
 	private String stringValue;
-	private int intValue;
-	private double doubleValue;
-	
+
 	public User inputUserInfo(){
 		User user = new User();
 		Scanner scanner =  new Scanner();
@@ -74,7 +71,7 @@ public class InputInfo {
 		
 		user.setMoney(1000);
 		user.setRole(UserRole.PASSENGER);
-		user.setTicketList(new ArrayList<Ticket>());
+		user.setTicketList(new ArrayList<>());
 		
 		return user;
 	}
@@ -84,9 +81,9 @@ public class InputInfo {
 		Scanner scanner =  new Scanner();
 		
 		System.out.print("Enter login: ");
-		cridential[0] = scanner.getString();;
+		cridential[0] = scanner.getString();
 		System.out.print("Enter password: ");
-		cridential[1] = scanner.getString();;
+		cridential[1] = scanner.getString();
 		
 		return cridential;
 	}
@@ -153,7 +150,7 @@ public class InputInfo {
 		outputInfo.showStations(stationSet);
 		
 		System.out.print("Enter depature station(1-" + stationSet.size() + "): ");
-		intValue = scanner.getInt();
+		int intValue = scanner.getInt();
 		if(validator.checkStation(intValue))
 			schedule.setDepatureStation(utils.getStatonOfSet(stationSet, intValue));
 		
@@ -169,11 +166,11 @@ public class InputInfo {
 		
 		
 		System.out.print("Enter ticket price: ");
-		doubleValue = scanner.getDouble();
+		double doubleValue = scanner.getDouble();
 		if(validator.checkRegexp(String.valueOf(doubleValue), "train.price"))
 			train.setPrice(doubleValue);
 		
-		train.setUserList(new ArrayList<User>());
+		train.setUserList(new ArrayList<>());
 		train.setSchedule(schedule);
 		
 		return train;
@@ -213,9 +210,8 @@ public class InputInfo {
 		Scanner scanner = new Scanner();
 		
 		System.out.print("Enter train id: ");
-		int id = scanner.getInt();
-		
-		return id;
+
+		return scanner.getInt();
 		
 	}
 }

@@ -4,7 +4,6 @@
 package by.home.grigoryev.train.service.menegers;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeSet;
 
@@ -33,7 +32,7 @@ public class ManagerImpl implements IManager{
 		
 		IBaseDao<User, Serializable> dao = new BaseDaoImpl<>(User.class);
 		
-		List<User> userList = new ArrayList<>();
+		List<User> userList;
 		userList = dao.getAll();
 		
 		for(User user : userList){	
@@ -58,9 +57,8 @@ public class ManagerImpl implements IManager{
 	public TreeSet<Station> getStationList() {
 		
 		IStationDao stationDao = new StationDaoImpl();
-		TreeSet<Station> stationList = stationDao.getStationList();
-		
-		return stationList;
+
+		return stationDao.getStationList();
 	}
 
 	/**

@@ -32,8 +32,7 @@ public class AdminManagerImpl extends ManagerImpl implements IAdminManager{
 	public List<User> getUserList() {
 		
 		IBaseDao<User, Serializable> dao = new BaseDaoImpl<>(User.class);
-		List<User> userList = dao.getAll();
-		return userList;
+		return dao.getAll();
 	}
 	
 	/**
@@ -43,9 +42,8 @@ public class AdminManagerImpl extends ManagerImpl implements IAdminManager{
 	public List<Train> getTrainList() {
 		
 		IBaseDao<Train, Serializable> dao = new BaseDaoImpl<>(Train.class);
-		List<Train> trainList = dao.getAll();
-		
-		return trainList;
+
+		return dao.getAll();
 	}
 	
 	/**
@@ -58,9 +56,9 @@ public class AdminManagerImpl extends ManagerImpl implements IAdminManager{
 		List<Train> trainList = getTrainList();
 		int maxId = 0;
 		if(!trainList.isEmpty()){
-			for(int i = 0; i < trainList.size(); i++){
-				if(trainList.get(i).getId() > maxId)
-					maxId = trainList.get(i).getId();
+			for (Train aTrainList : trainList) {
+				if (aTrainList.getId() > maxId)
+					maxId = aTrainList.getId();
 			}
 		}
 		train.setId(maxId + 1);

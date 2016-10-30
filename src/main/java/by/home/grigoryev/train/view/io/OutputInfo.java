@@ -27,10 +27,10 @@ public class OutputInfo {
 		System.out.println(message);
 	}
 	
-	public void showStations(Set<Station> stationList){
+	void showStations(Set<Station> stationList){
 		
 		Iterator<Station> iterator = stationList.iterator();
-		Station station = new Station();
+		Station station;
 		
 		int i = 0;
 		

@@ -19,13 +19,13 @@ public class User extends Entity implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	protected String login;
-	protected String password;
-	protected String name;
-	protected String surname;
-	protected String email;
-	protected String phone;
-	protected UserRole role;
+	private String login;
+	private String password;
+	private String name;
+	private String surname;
+	private String email;
+	private String phone;
+	private UserRole role;
 	private double money;
 	private List<Ticket> ticketList;
 	

@@ -16,7 +16,7 @@ public class Entity implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	protected int id;
+	private int id;
 
 	public int getId() {
 		return id;

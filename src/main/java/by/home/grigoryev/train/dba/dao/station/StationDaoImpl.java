@@ -28,32 +28,30 @@ public class StationDaoImpl extends BaseDaoImpl<Station, Serializable> implement
 	}
 	
 	private FilePath filePath = new FilePath();
-	
+
 	@Override
 	public TreeSet<Station> getStationList() {
-		
-		
+
 		TreeSet<Station> stationList = new TreeSet<>(new StationComparator());
-		
+
 		File file = new File(filePath.getFilePath("file.station"));
-		
-			
+		if(file.exists()){
 			Scanner scanner = null;
 			try {
 				scanner = new Scanner(file);
 			} catch (FileNotFoundException e) {
 				OutputInfo.showMessage("File " + file.getName() + " not found");
 			}
-			
+
 			while(scanner.hasNextLine()){
 				Station station = new Station();
 				station.setStation(scanner.nextLine());
-				stationList.add(station);	
+				stationList.add(station);
 			}
-			
+
 			scanner.close();
-			
-		
+		}	else System.out.println("File " + file.getName() + "not found");
+
 		return stationList;
 	}
 

@@ -124,7 +124,7 @@ public class BaseDaoImpl<T, PK extends Serializable> implements IBaseDao<T, PK>{
 			path = filePath.getFilePath("file.train");
 		}
 		
-		List<T> objList = new ArrayList<>();
+		List<T> objList;
 		objList = getAll();
 		objList.add(object);
 		
@@ -182,9 +182,7 @@ public class BaseDaoImpl<T, PK extends Serializable> implements IBaseDao<T, PK>{
 		}else if(clazz.equals(Train.class)){
 			file = new File(filePath.getFilePath("file.train"));
 		}
-		
-		if(file.length() == 0)
-			return false;
-		else return true;
+
+		return file.length() != 0;
 	}
 }

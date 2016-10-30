@@ -45,9 +45,9 @@ public class PassengerManagerImpl extends ManagerImpl implements IPassengerManag
 		List<User> passList = dao.getAll();
 		int maxId = 0;
 		if(!passList.isEmpty()){
-			for(int i = 0; i < passList.size(); i++){
-				if(passList.get(i).getId() > maxId)
-					maxId = passList.get(i).getId();
+			for (User aPassList : passList) {
+				if (aPassList.getId() > maxId)
+					maxId = aPassList.getId();
 			}
 		}
 		user.setId(maxId + 1);
@@ -89,14 +89,14 @@ public class PassengerManagerImpl extends ManagerImpl implements IPassengerManag
 		
 		before.add(GregorianCalendar.DAY_OF_YEAR, -1);
 		after.add(GregorianCalendar.DAY_OF_YEAR, 1);
-		
-		
+
+
 		for(Train train : trainList){
-			if(train.getSchedule().getDepatureStation().getStation().equals(depStation.getStation()) && 
-					train.getSchedule().getArrivalStation().getStation().equals(arrivalStation.getStation()) && 
-					!train.getSchedule().getDepatureTime().before(before) && 
+			if(train.getSchedule().getDepatureStation().getStation().equals(depStation.getStation()) &&
+					train.getSchedule().getArrivalStation().getStation().equals(arrivalStation.getStation()) &&
+					!train.getSchedule().getDepatureTime().before(before) &&
 					!train.getSchedule().getDepatureTime().after(after)){
-				
+
 				suitableTrains.add(train);
 			}
 		}
@@ -120,7 +120,7 @@ public class PassengerManagerImpl extends ManagerImpl implements IPassengerManag
 		List<User> usersInTrain = train.getUserList();
 		
 		Ticket ticket = new Ticket();
-		List<Ticket> ticketList = new ArrayList<>();
+		List<Ticket> ticketList;
 		
 		int indexTrain = trainList.indexOf(train);
 		
@@ -183,9 +183,7 @@ public class PassengerManagerImpl extends ManagerImpl implements IPassengerManag
 		}
 		
 		int index = users.indexOf(user);
-		
-		List<Ticket> tickets = dao.getAll().get(index).getTicketList();
-		
-		return tickets;
+
+		return dao.getAll().get(index).getTicketList();
 	}
 }
